@@ -31,7 +31,7 @@ class Profile extends Model implements HasMedia
             ->singleFile()
             ->registerMediaConversions(function (Media $media) {
                 $this
-                    ->addMediaConversion('sm')
+                    ->addMediaConversion('sd')
                     ->fit(Fit::Max, 360, 360)
                     ->nonQueued();
 
