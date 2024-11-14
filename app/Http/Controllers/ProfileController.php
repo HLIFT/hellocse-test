@@ -94,6 +94,8 @@ class ProfileController extends Controller
 
         $this->profileRepository->delete($profile);
 
+        // Lorsqu'un profil est supprimé l'image associée est automatiquement supprimée
+
         return response()->json([
             'success' => true,
         ]);
