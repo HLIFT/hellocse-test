@@ -23,6 +23,7 @@ class ProfileController extends Controller
     }
 
     /**
+     * Index
      * @param GetActiveProfilesRequest $request
      * @return JsonResponse
      */
@@ -39,6 +40,7 @@ class ProfileController extends Controller
     }
 
     /**
+     * Store
      * @param ProfileRequest $request
      * @return JsonResponse
      */
@@ -56,6 +58,7 @@ class ProfileController extends Controller
     }
 
     /**
+     * Update
      * @param ProfileRequest $request
      * @param int $id
      * @return JsonResponse
@@ -78,6 +81,7 @@ class ProfileController extends Controller
     }
 
     /**
+     * Delete
      * @param Request $request
      * @param int $id
      * @return JsonResponse

@@ -12,6 +12,7 @@ use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 class ProfileRepository
 {
     /**
+     * Récupération d'un profil par son id
      * @param int $id
      * @return Profile|null
      */
@@ -21,6 +22,7 @@ class ProfileRepository
     }
 
     /**
+     * Récupération de tous les profils actifs paginés
      * @param int|null $perPage
      * @param int|null $page
      * @return LengthAwarePaginator
@@ -36,6 +38,7 @@ class ProfileRepository
     }
 
     /**
+     * Création d'un profil
      * @param ProfileData $profileDTO
      * @return Profile
      */
@@ -55,6 +58,7 @@ class ProfileRepository
 
 
     /**
+     * Mise à jour d'un profil
      * @param Profile $profile
      * @param ProfileData $profileDTO
      * @return Profile
@@ -78,6 +82,7 @@ class ProfileRepository
     }
 
     /**
+     * Suppression d'un profil
      * @param Profile $profile
      * @return void
      */
