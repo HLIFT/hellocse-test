@@ -1,66 +1,123 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Projet Laravel API - Gestion de profils
 
-## About Laravel
+Ce projet est une API REST développée en Laravel permettant de gérer des profils. Il inclut des fonctionnalités de création, modification, suppression de profils et une route publique pour récupérer les profils actifs.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🏁  Initialisation du projet
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Suivez les étapes ci-dessous pour configurer et lancer le projet en local.
 
-## Learning Laravel
+### Étape 1 : Copier le fichier d'environnement
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. Dupliquez le fichier `.env.example` en `.env`.
+   ```bash
+   cp .env.example .env
+   ```
+2. Ouvrez le fichier `.env` et renseignez les informations de connexion à votre base de données :
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=nom_de_votre_base
+   DB_USERNAME=nom_utilisateur
+   DB_PASSWORD=mot_de_passe
+   ```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Étape 2 : Générer la clé de l'application
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Exécutez la commande suivante pour générer une clé unique pour l'application :
 
-## Laravel Sponsors
+```bash
+php artisan key:generate
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Étape 3 : Créer le lien symbolique pour le stockage
 
-### Premium Partners
+Pour permettre l'accès aux fichiers téléchargés via le stockage public, créez un lien symbolique entre le répertoire de stockage et le répertoire public :
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+```bash
+php artisan storage:link
+```
 
-## Contributing
+### Étape 4 : Lancer les migrations
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Créez les tables nécessaires en exécutant les migrations :
 
-## Code of Conduct
+```bash
+php artisan migrate
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Étape 5 : Seed de la base de données
 
-## Security Vulnerabilities
+Pour générer les données de base, y compris un utilisateur administrateur par défaut, lancez la commande de seeding :
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+php artisan db:seed
+```
 
-## License
+Un utilisateur administrateur par défaut sera créé avec les informations suivantes :
+- **Email** : `admin@admin.com`
+- **Mot de passe** : `password`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Vous pouvez utiliser cet utilisateur pour vous connecter et récupérer un token d'authentification.
+
+---
+
+## ℹ️  Informations sur le projet
+
+### ⚙️ Fonctionnalités
+
+L'API permet de :
+- Créer, mettre à jour, et supprimer des profils (uniquement pour les administrateurs authentifiés).
+- Récupérer les profils ayant le statut "actif" via une route publique.
+
+### 🔐  Authentification
+
+Pour effectuer des opérations de modification ou de suppression sur les profils, vous devez être authentifié en tant qu'administrateur.
+
+- **Route de connexion** : `/api/login`
+    - **Méthode** : POST
+    - **Paramètres** :
+        - `email` : l'email de l'administrateur (par défaut `admin@admin.com`)
+        - `password` : le mot de passe (par défaut `password`)
+    - **Exemple de réponse** :
+      ```json
+      {
+          "token": "votre-token"
+      }
+      ```
+
+Utilisez le token reçu dans l'en-tête `Authorization` de vos requêtes pour vous authentifier :
+```
+Authorization: Bearer votre-token
+```
+
+### 📄 Documentation de l'API
+
+La documentation complète de l'API est disponible à l'URL suivante :
+```
+/docs/api
+```
+
+Vous retrouverez aussi un export d'une collection Insomnia dans les fichiers du projet :
+```
+storage/api/Insomnia_2024-11-14.json
+```
+
+---
+
+## 🧪 Tests
+
+Le projet inclut des tests pour valider les principales fonctionnalités de l'API. Pour exécuter les tests, utilisez la commande suivante :
+
+```bash
+php artisan test
+```
+
+---
+
+## 🙍‍♂️ Auteur
+
+Ce projet a été développé par Guillaume Ventura dans le cadre du test demandé par HelloCSE.
