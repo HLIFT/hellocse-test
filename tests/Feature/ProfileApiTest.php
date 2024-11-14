@@ -87,7 +87,8 @@ class ProfileApiTest extends TestCase
                     'url_md',
                     'url_hd',
                 ],
-                'created_at'
+                'created_at',
+                'status'
             ]
         ]);
     }
@@ -139,7 +140,8 @@ class ProfileApiTest extends TestCase
                     'url_md',
                     'url_hd',
                 ],
-                'created_at'
+                'created_at',
+                'status'
             ]
         ]);
     }
