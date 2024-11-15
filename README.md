@@ -9,7 +9,16 @@ Ce projet est une API REST développée en Laravel permettant de gérer des prof
 
 Suivez les étapes ci-dessous pour configurer et lancer le projet en local.
 
-### Étape 1 : Copier le fichier d'environnement
+### Étape 1 : Installer les dépendances composer
+
+Exécutez la commande suivante pour installer les dépendances composer :
+
+```bash
+composer install
+```
+
+
+### Étape 2 : Copier le fichier d'environnement
 
 1. Dupliquez le fichier `.env.example` en `.env`.
    ```bash
@@ -25,7 +34,7 @@ Suivez les étapes ci-dessous pour configurer et lancer le projet en local.
    DB_PASSWORD=mot_de_passe
    ```
 
-### Étape 2 : Générer la clé de l'application
+### Étape 3 : Générer la clé de l'application
 
 Exécutez la commande suivante pour générer une clé unique pour l'application :
 
@@ -33,7 +42,7 @@ Exécutez la commande suivante pour générer une clé unique pour l'application
 php artisan key:generate
 ```
 
-### Étape 3 : Créer le lien symbolique pour le stockage
+### Étape 4 : Créer le lien symbolique pour le stockage
 
 Pour permettre l'accès aux fichiers téléchargés via le stockage public, créez un lien symbolique entre le répertoire de stockage et le répertoire public :
 
@@ -41,7 +50,7 @@ Pour permettre l'accès aux fichiers téléchargés via le stockage public, cré
 php artisan storage:link
 ```
 
-### Étape 4 : Lancer les migrations
+### Étape 5 : Lancer les migrations
 
 Créez les tables nécessaires en exécutant les migrations :
 
@@ -49,7 +58,7 @@ Créez les tables nécessaires en exécutant les migrations :
 php artisan migrate
 ```
 
-### Étape 5 : Seed de la base de données
+### Étape 6 : Seed de la base de données
 
 Pour générer les données de base, y compris un utilisateur administrateur par défaut, lancez la commande de seeding :
 
@@ -65,7 +74,7 @@ Vous pouvez utiliser cet utilisateur pour vous connecter et récupérer un token
 
 ---
 
-## ℹ️  Informations sur le projet
+## ℹ️ Informations sur le projet
 
 ### ⚙️ Fonctionnalités
 
